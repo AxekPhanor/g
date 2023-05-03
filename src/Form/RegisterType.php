@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class RegisterType extends AbstractType
 {
@@ -27,6 +28,7 @@ class RegisterType extends AbstractType
 
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
+                'constraints' => new Assert\Length(min: 6),
                 'invalid_message' => 'Veuillez retaper votre mot de passe',
                 'required' => true,
                 'first_options' => [
@@ -42,7 +44,7 @@ class RegisterType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'S\'inscrire',
                 'attr' => [
-                    'class' => 'btn btn-success',
+                    'class' => 'btn btn-lg btn-primary',
                 ]
             ]);
         ;
