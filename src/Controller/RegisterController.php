@@ -15,9 +15,13 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class RegisterController extends AbstractController
 {
-    #[Route('/inscription', name: 'register')]
+    #[Route('/inscription', name: 'app_register')]
     public function index(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {
+        if ($this->getUser()) { // redirection
+            return $this->redirectToRoute('app_account');
+        }
+
         $user = new User();
         $form = $this -> createForm(RegisterType::class, $user);
         
