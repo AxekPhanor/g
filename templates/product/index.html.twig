@@ -3,5 +3,29 @@
 {% block title %}Produits - Les gâteaux de la madre{% endblock %}
 
 {% block content %}
+<link href="{{ asset('assets/css/produits.css') }}"  rel="stylesheet">
+
 <h1 class="h1 mb-3 font-weight-normal">Produits</h1>
+
+<div class="row">
+{% for product in products %}
+
+<div class="card" style="width: 17rem; margin: 2px;">
+  <img src="uploads/images/{{product.illustration}}" alt="{{product.name}}" class="card-img-top">
+  <div class="card-body">
+    <h5 class="card-title">{{product.name}}</h5>
+    <span class="card-price">{{(product.price / 100 ) | number_format(2)}} € </span>
+    <p class="card-text">{{product.description}}</p>
+    {% if app.user %}
+    <div class="ajout-Panier"><button href="#" class="btn btn-secondary">Ajouter au panier</button></div>
+    {% else %}
+    <div class="ajout-Panier"><button href="#" class="btn btn-secondary" disabled>Ajouter au panier</button></div>
+    {% endif %}
+  </div>
+</div>
+
+{% endfor %}
+</div>
+
 {% endblock %}
+
