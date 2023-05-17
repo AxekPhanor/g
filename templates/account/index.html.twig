@@ -3,7 +3,25 @@
 {% block title %}Mon compte - Les gâteaux de la madre{% endblock %}
 
 {% block content %}
+<link href="{{ asset('assets/css/account.css') }}"  rel="stylesheet">
 <h1 class="h1 mb-3 font-weight-normal">Mon compte</h1>
 <!--- {{dump(app.user)}} -->
 <!--- TO DO : faire un tableau avec les différentes informations du compte que l'on peut modifier -->
+
+
+<div class="divTable" style="width: 80%; border: 1px solid #000;">
+<div class="divTableBody">
+<div class="divTableRow">
+<div class="divTableCell borderBottom"><strong>Email</strong></div>
+<div class="divTableCell borderBottom">{{email}}</div>
+</div>
+<div class="divTableRow">
+<div class="divTableCell"><strong>Mot de passe</strong><br></div>
+<div class="divTableCell">{{ form(form) }}</div>
+</div>
+</div>
+</div>
+
+
+
 {% endblock %}

@@ -38,14 +38,18 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
+                    <a class="nav-link" href="{{path('app_product')}}">Produits</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
                 {% if app.user %}
                 <li class="nav-item active">
                     <a class="nav-link" href="{{path('app_account')}}">Mon compte</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{path('app_logout')}}">Deconnexion</a>
+                    <a class="nav-link" href="{{path('app_logout')}}">Déconnexion</a>
                 </li>
                 {% else %}
                 <li class="nav-item active">
@@ -117,6 +121,13 @@
     <!-- Wrap the rest of the page in another container to center all the content. -->
 
     <div class="container marketing {% if block('carousel') is not defined %}mt-5{% endif %}" > 
+        
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="alert-heading">{{ message }}</h4>
+            </div>
+        {% endfor %}
 
         {% block content %}
         {% endblock %}
@@ -125,8 +136,10 @@
 
     <!-- FOOTER -->
     <footer class="container">
+        {% if block('carousel') is defined %}
         <p class="float-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2017-2020 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        {% endif %}
+        <!-- <p>&copy; 2017-2020 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p> --> 
     </footer>
 </main>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

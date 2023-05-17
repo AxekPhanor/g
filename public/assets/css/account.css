@@ -1,0 +1,26 @@
+.divTable{
+	display: table;
+	width: 100%;
+    border-radius: 20px;
+    background-color: #4D5057;
+    color: #F5F3F5;
+	text-align: right;
+}
+.divTableRow {
+	display: table-row;
+}
+
+.divTableCell {
+	display: table-cell;
+	padding-top: 5px;
+	padding-bottom: 30px;
+	padding-right: 10px;
+}
+
+.borderBottom {
+	border-bottom: 1px solid #000000;
+}
+
+.divTableBody {
+	display: table-row-group;
+}
