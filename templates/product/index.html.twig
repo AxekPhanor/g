@@ -18,7 +18,11 @@
     <h5 class="card-title">{{product.name}}</h5>
     <span class="card-price">{{(product.price / 100 ) | number_format(2)}} € </span>
     <p class="card-text">{{product.id}}</p>
-    {{ form(form[loop.index0]) }}
+    {% if app.user %}
+    <a class="btn btn-secondary" href="{{ path('add_to_cart', {'id': product.id}) }}">Ajouter au panier</a>
+    {% else %}
+    <button class="btn btn-secondary" disabled href="">Ajouter au panier</button>
+    {% endif %}
   </div>
 </div>
 

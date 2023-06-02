@@ -13,15 +13,15 @@ class Cart
         $this->session = $requestStack->getSession();
     }
 
-    public function add($id, $quantity)
+    public function add($id)
     {
         $cart = $this->session->get('cart', []);
 
         if(!empty($cart[$id])) {
-            $cart[$id]+= $quantity;
+            $cart[$id]++;
         }
         else{
-            $cart[$id] = $quantity;
+            $cart[$id] = 1;
         }
         $this->session->set('cart', $cart);
        
