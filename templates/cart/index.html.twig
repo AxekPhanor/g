@@ -4,6 +4,7 @@
 
 {% block content %}
 <h1 class="h1 mb-3 font-weight-normal">Mon panier</h1>
+{% if cart|length != 0 %}
 <table class="table">
   <thead>
     <tr>
@@ -21,9 +22,21 @@
             <img src="/uploads/images/{{products.product.illustration}}" alt="{{products.product.name}}" height="75px"><br/>
         </th>
         <td>{{products.product.name}}</td>
-        <td>X {{products.quantity}}</td>
+        <td> 
+            <a href="{{ path('add_to_cart', {'id': products.product.id}) }}">
+                <img src="{{ asset('assets/icones/plus.png') }}" height="12px" alt="Ajouter un produit">
+            </a>
+            <b>{{products.quantity}}</b>
+            <a href="{{ path('decrease_to_cart', {'id': products.product.id}) }}">
+                <img src="{{ asset('assets/icones/moins.png') }}" height="12px" alt="Retirer un produit">
+            </a>
+        </td>
         <td>{{(products.product.price / 100 ) | number_format(2)}} € </td>
         <td>{{(products.product.price / 100 ) * products.quantity | number_format(2)}} €</td>
+        <td>
+        <a href="{{ path('remove_cart', {'id': products.product.id}) }}">
+        <img src="{{ asset('assets/icones/delete.png') }}" height="18px" alt="Supprimer mon produit"></td>
+        <a/>
         </tr>
         {% set total = total + (products.product.price * products.quantity) %}
     {% endfor %}
@@ -35,6 +48,9 @@
     <a class="btn btn-danger" href="{{path('delete_cart')}}">Vider le panier</a>
     <a class="btn btn-success" href="">Valider mon panier<a/>
 </div>
-    
+{% else %}
+<hr>
+<b>Votre panier est vide...</b>
+{% endif %}
 
 {% endblock %}

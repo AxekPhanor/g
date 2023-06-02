@@ -11,30 +11,12 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class CartController extends AbstractController
 {
-    private $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
-    
 
     #[Route('/mon-panier', name: 'app_cart')]
     public function index(Cart $cart): Response
     {
-        $cartComplete = [];
-        if(!empty($cart->get())){
-            foreach($cart->get() as $id => $quantity){
-                $cartComplete[] = [
-                    'product' => $this->entityManager->getRepository(Product::class)->findOneById($id),
-                    'quantity' => $quantity,
-                ];
-            }
-        }
-        
         return $this->render('cart/index.html.twig', [
-            'cart' => $cartComplete
+            'cart' => $cart->getFull()
         ]);
     }
 
@@ -42,13 +24,27 @@ class CartController extends AbstractController
     public function add(Cart $cart, $id)
     {   
         $cart->add($id);
-        return $this->redirectToRoute('app_product');
+        return $this->redirectToRoute('app_cart');
+    }
+
+    #[Route('/cart/decrease/{id}', name: 'decrease_to_cart')]
+    public function decrease(Cart $cart, $id)
+    {   
+        $cart->decrease($id);
+        return $this->redirectToRoute('app_cart');
     }
 
     #[Route('/cart/delete', name: 'delete_cart')]
     public function delete(Cart $cart)
     {
         $cart->delete();
+        return $this->redirectToRoute('app_cart');
+    }
+
+    #[Route('/cart/remove/{id}', name: 'remove_cart')]
+    public function remove(Cart $cart, $id)
+    {
+        $cart->remove($id);
         return $this->redirectToRoute('app_cart');
     }
 }

@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Product;
 use App\Entity\User;
+use App\ClassPhp\Cart;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ProductController extends AbstractController
@@ -28,5 +29,12 @@ class ProductController extends AbstractController
         return $this->render('product/index.html.twig', [
             'products' => $products,
         ]);
+    }
+
+    #[Route('/cartP/add/{id}', name: 'add_to_cartP')]
+    public function add(Cart $cart, $id)
+    {   
+        $cart->add($id);
+        return $this->redirectToRoute('app_product');
     }
 }
