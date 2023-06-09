@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes adresses - Les gâteaux de la madre{% endblock %}
+
+{% block content %}
+<h1 class="h1 mb-3 font-weight-normal">Mes adresses</h1>
+<a href="{{path('app_account_address_add')}}" class ="btn btn-dark btn-sm">Ajouter une adresse</a>
+<a href="" class ="btn btn-dark btn-sm">Modifier une adresse</a>
+<a href="" class ="btn btn-dark btn-sm">Supprimer une adresse</a>
+<a href="{{path('app_account')}} " class ="btn btn-dark btn-sm">Retour</a>
+<hr>
+{% if app.user.addresses|length == 0 %}
+<p>Vous n'avez aucune adresse sur votre compte pour en ajouter une <a href="">cliquer ici</a>.</p>
+{% else %}
+{% endif %}
+{% endblock %}

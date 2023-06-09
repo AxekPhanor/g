@@ -9,19 +9,26 @@
 <!--- TO DO : faire un tableau avec les différentes informations du compte que l'on peut modifier -->
 
 
-<div class="divTable" style="width: 80%; border: 1px solid #000;">
+<div class="divTable">
 <div class="divTableBody">
 <div class="divTableRow">
 <div class="divTableCell borderBottom"><strong>Email</strong></div>
-<div class="divTableCell borderBottom">{{email}}</div>
+<div class="divTableCell borderBottom"><input type="text" class="inputBox" value="{{email}}" disabled></div> <!--- TODO : A METTRE DANS UN TEXT BOX -->
 </div>
 <div class="divTableRow">
-<div class="divTableCell"><strong>Mot de passe</strong><br></div>
-<div class="divTableCell">{{ form(form) }}</div>
+<div class="divTableCell borderBottom"><strong>Mot de passe</strong><br></div>
+<div class="divTableCell borderBottom">{{ form(form) }}</div>
+</div>
+<div class="divTableRow">
+<div class="divTableCell ">
+<strong>Dernière adresse utilisé</strong><br>
+</div>
+<div class="divTableCell ">
+    <input type="text" class="inputBox" value="Bayonne" disabled><br>
+    <a class="btn btn-dark mt-3" href="{{path('app_account_address')}}">Gérer mes adresses</a>
 </div>
 </div>
 </div>
-
-
+</div>
 
 {% endblock %}
