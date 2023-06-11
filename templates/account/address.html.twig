@@ -12,5 +12,20 @@
 {% if app.user.addresses|length == 0 %}
 <p>Vous n'avez aucune adresse sur votre compte pour en ajouter une <a href="">cliquer ici</a>.</p>
 {% else %}
+
+<div class="row">
+{% for address in app.user.addresses %}
+<div class="card" style="width: 17rem; margin: 2px;">
+    <img src="" class="card-img-top">
+    <div class="card-body">
+        <h5 class="card-title">{{address.name}}</h5>
+        <p class="card-text">{{address.address}}
+        {{address.postal}}, {{address.city}}</p>
+        <span><a href="{{path('app_account_address_edit', {'id': address.id})}}" class="btn btn-dark btn-sm">Modifier</a></span>
+        <span><a href=" {{path('app_account_address_delete', {'id': address.id})}}" class="btn btn-dark btn-sm">Supprimer</a></span>
+    </div>
+</div>
+{% endfor %}
+</div>
 {% endif %}
 {% endblock %}
