@@ -2,15 +2,34 @@
 
 namespace App\Controller;
 
+use App\Form\OrderType;
+use App\ClassPhp\Cart;
+use App\Entity\Order;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class OrderController extends AbstractController
 {
     #[Route('/commande', name: 'app_order')]
-    public function index(): Response
+    public function index(Cart $cart, Request $request): Response
     {
-        return $this->render('order/index.html.twig');
+        if(!$this->getUser()->getAddresses()->getValues()){
+            return $this->redirectToRoute('app_account_address_add');
+        }
+        $form = $this -> createForm(OrderType::class, null, [
+            'user' => $this->getUser(),
+        ]);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            dd($form->getData());
+        }
+
+        return $this->render('order/index.html.twig',[
+            'form' => $form->createView(),
+            'cart' => $cart->getFull(),
+        ]);
     }
 }

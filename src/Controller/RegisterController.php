@@ -19,7 +19,7 @@ class RegisterController extends AbstractController
     public function index(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {
         if ($this->getUser()) { // redirection
-            return $this->redirectToRoute('app_account');
+            return $this->redirectToRoute('app_product');
         }
 
         $user = new User();

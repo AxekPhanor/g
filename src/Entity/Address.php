@@ -168,4 +168,9 @@ class Address
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->getName().'[br]'.$this->getAddress().'[br]'.$this->getCity().' - '.$this->getCountry();
+    }
 }
