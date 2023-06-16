@@ -10,9 +10,10 @@
     <div class="col-md-6">
         {{form_start(form, {action: path('app_order_recap')})}}
         {% set formHtml %}
-            <h5 class="h5 mb-3 font-weight-normal">Choisir mon adresse de livraison</h5>
+            <h5 class="h5 mb-1 font-weight-normal">Choisir mon adresse de livraison</h5>
+            <a href="{{path('app_account_address_add')}}">Ajouter une nouvelle adresse</a><br/><!--- TODO : RENVOYER VERS LA CREATION D'UNE NOUVELLE ADRESSE -->
             {{form_row(form.address)}}
-            <h5 class="h5 mb-3 font-weight-normal">Choisir votre transporteur</h5>
+            <h5 class="h5 mb-1 font-weight-normal">Choisir votre transporteur</h5>
             {{form_row(form.carrier)}}
         {% endset %}
         {{formHtml|replace({'[br]' : '<br/>'})|raw}}
@@ -21,12 +22,12 @@
         {{form_end(form)}}
     </div>
     <div class="col-md-6 pl-5">
-        <h5 class="h5 mb-3 font-weight-normal">Récapitulatif</h5>
+        <h5 class="h5 mb-1 font-weight-normal">Récapitulatif</h5>
         <div class="order-summary">
         {% for product in cart %}
             <div class="row">
             <div class="col-2"> 
-                <img src="uploads/images/{{product.product.illustration}}" alt="{{product.product.name}}" height="75px">
+                <img src="/uploads/images/{{product.product.illustration}}" alt="{{product.product.name}}" height="75px">
             </div>
             <div class="col-8 pl-5 my-auto">{{product.product.name}}</div>
             <div class="col-2 my-auto"><b>X {{product.quantity}}</b></div>

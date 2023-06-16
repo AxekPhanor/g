@@ -3,6 +3,7 @@
 {% block title %}Mon panier - Les gâteaux de la madre{% endblock %}
 
 {% block content %}
+<link href="{{ asset('assets/css/cart.css') }}"  rel="stylesheet">
 <h1 class="h1 mb-3 font-weight-normal">Mon panier</h1>
 {% if cart|length != 0 %}
 <table class="table">
@@ -23,13 +24,20 @@
         </th>
         <td>{{products.product.name}}</td>
         <td> 
-            <a href="{{ path('add_to_cart', {'id': products.product.id}) }}">
+            
+            <a class="removeUnderline" href="{{ path('add_to_cart', {'id': products.product.id}) }}">
                 <img src="{{ asset('assets/icones/plus.png') }}" height="12px" alt="Ajouter un produit">
             </a>
             <b>{{products.quantity}}</b>
-            <a href="{{ path('decrease_to_cart', {'id': products.product.id}) }}">
+            {% if products.quantity < 2 %}
+                <a class="removeUnderline" href="{{ path('remove_cart', {'id': products.product.id}) }}">
                 <img src="{{ asset('assets/icones/moins.png') }}" height="12px" alt="Retirer un produit">
             </a>
+            {% else %}
+                <a class="removeUnderline" href="{{ path('decrease_to_cart', {'id': products.product.id}) }}">
+                    <img src="{{ asset('assets/icones/moins.png') }}" height="12px" alt="Retirer un produit">
+                </a>
+            {% endif %}
         </td>
         <td>{{(products.product.price / 100 ) | number_format(2)}} € </td>
         <td>{{(products.product.price / 100 ) * products.quantity | number_format(2)}} €</td>

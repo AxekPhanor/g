@@ -1,7 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Validation de la commande - Les gâteaux de la madre{% endblock %}
+{% block title %}Récapitulatif - Les gâteaux de la madre{% endblock %}
 
 {% block content %}
-
+<link href="{{ asset('assets/css/order.css') }}"  rel="stylesheet">
+<h1 class="h1 mb-3 font-weight-normal">Ma commande</h1>
+<hr>
+<div class="row">
+    <div class="col-md-6">
+        <h5 class="h5 mb-1 font-weight-normal">Mon adresse de livraison</h5>
+        <div class="order-summary">
+        {{deliveryContent|raw}}
+        </div><br/>
+        <h5 class="h5 mb-1 font-weight-normal">Mon transporteur</h5>
+        <div class="order-summary">
+        {{carrier.name}}<br/>
+        {{carrier.description}}<br/>
+        </div>
+    </div>
+    <div class="col-md-6 pl-5">
+        <h5 class="h5 mb-1 font-weight-normal">Récapitulatif</h5>
+        <div class="order-summary">
+        {% set total = 0 %}
+        {% for product in cart %}
+            <div class="row">
+            <div class="col-2"> 
+                <img src="/uploads/images/{{product.product.illustration}}" alt="{{product.product.name}}" height="75px">
+            </div>
+            <div class="col-8 pl-5 my-auto">{{product.product.name}}</div>
+            <div class="col-2 my-auto">{{((product.product.price * product.quantity) / 100)|number_format(2, ',')}} €</div>
+            </div>
+            <br>
+            {% set total = total + (product.product.price * product.quantity) / 100 %}
+        {% endfor %}
+        <hr>
+        <b>Sous-Total : </b> {{total|number_format(2, ',')}} € <br/>
+        <b>livraison : </b> {{carrier.price|number_format(2, ',')}} €
+        <hr>
+        <b>Total : </b> {{(total + carrier.price)|number_format(2, ',')}} €
+        
+        </div>
+        <br>
+        <a href="" class="btn btn-success btn-lg btn-block">Payer | {{(total + carrier.price)|number_format(2, ',')}} €</a>
+    </div>
+    
+</div>
 {% endblock %}
