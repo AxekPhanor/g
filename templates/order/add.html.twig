@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block js %}
+<script src="https://js.stripe.com/v3/"></script
+{% endblock %}
+
 {% block title %}Récapitulatif - Les gâteaux de la madre{% endblock %}
 
 {% block content %}
@@ -41,7 +45,7 @@
         
         </div>
         <br>
-        <a href="" class="btn btn-success btn-lg btn-block">Payer | {{(total + carrier.price)|number_format(2, ',')}} €</a>
+        <a href="{{ path('app_stripe') }}" class="btn btn-success btn-lg btn-block">Payer | {{(total + carrier.price)|number_format(2, ',')}} €</a>
     </div>
     
 </div>
