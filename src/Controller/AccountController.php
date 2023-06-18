@@ -17,6 +17,7 @@ class AccountController extends AbstractController
     {
         $user = $this->getUser();
         $form = $this->createForm(ChangePasswordType::class, $user);
+        $passwordIsChange = false;
 
         $form ->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
@@ -29,10 +30,9 @@ class AccountController extends AbstractController
             $user = $form->getData();
             $entityManager->persist($user);
             $entityManager->flush();
-            
-            $this->addflash('success', 'Mot de passe modifié');
+            $passwordIsChange = true;
 
-            return $this->redirectToRoute('app_account');
+            //return $this->redirectToRoute('app_account');
         }
 
 
@@ -41,6 +41,7 @@ class AccountController extends AbstractController
             'controller_name' => 'AccountController',
             'email' => $user->getEmail(), 
             'form' => $form->createView(),
+            'passwordIsChange' => $passwordIsChange,
         ]);
     }
 }

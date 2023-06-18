@@ -4,16 +4,19 @@
 
 {% block content %}
 <link href="{{ asset('assets/css/account.css') }}"  rel="stylesheet">
+
 <h1 class="h1 mb-3 font-weight-normal">Mon compte</h1>
-<!--- {{dump(app.user)}} -->
-<!--- TO DO : faire un tableau avec les différentes informations du compte que l'on peut modifier -->
-
-
+{% if passwordIsChange %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <h5 class="h5 font-weight-normal">Votre mot de passe à bien été changé</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
 <div class="divTable">
 <div class="divTableBody">
 <div class="divTableRow">
 <div class="divTableCell borderBottom"><strong>Email</strong></div>
-<div class="divTableCell borderBottom"><input type="text" class="inputBox" value="{{email}}" disabled></div> <!--- TODO : A METTRE DANS UN TEXT BOX -->
+<div class="divTableCell borderBottom"><input type="text" class="inputBox" value="{{email}}" disabled></div>
 </div>
 <div class="divTableRow">
 <div class="divTableCell borderBottom"><strong>Mot de passe</strong><br></div>
