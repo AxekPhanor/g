@@ -18,7 +18,6 @@ class AccountController extends AbstractController
         $user = $this->getUser();
         $form = $this->createForm(ChangePasswordType::class, $user);
         $passwordIsChange = false;
-
         $form ->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             $hashedPassword = $passwordHasher->hashPassword(

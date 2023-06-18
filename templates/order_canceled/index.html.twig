@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiment annulé - Les gâteaux de la madre{% endblock %}
+
+{% block content %}
+<h1 class="h1 mb-3 font-weight-normal">Paiment annulé</h1>
+<hr>
+<p>Le paiment a été annulé <a href="{{ path('app_stripe',{'reference': reference}) }}">cliquer ici</a> pour le reprendre</p>
+<img src="{{asset('assets/gif/questionMark.gif')}}" alt="catCake">
+
+{% endblock %}
+

@@ -63,6 +63,8 @@ class OrderController extends AbstractController
             
             $order = new Order();
             $date = new \DateTimeImmutable();
+            $reference = $date->format('dmY').'-'.uniqid();
+            $order->setReference($reference);
             $order->setUser($this->getUser());
             $order->setCreatedAt($date);
             $order->setCarrierName($carrier->getName());
@@ -96,6 +98,7 @@ class OrderController extends AbstractController
                 'cart' => $cart->getFull(),
                 'carrier' => $carrier,
                 'deliveryContent' => $deliveryContent,
+                'reference' => $order->getReference(),
             ]);
         }
     }

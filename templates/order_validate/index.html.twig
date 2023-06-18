@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La commande est validé ! - Les gâteaux de la madre{% endblock %}
+
+{% block content %}
+<h1 class="h1 mb-3 font-weight-normal">Commande payé</h1>
+<hr>
+<p>Merci <strong>{{order.user.firstname}} {{order.user.lastname}}</strong> pour votre commande n°<strong>{{order.reference}}</strong> ! <br/>
+Une confirmation d'achat a été envoyé par mail à l'adresse <strong>{{order.user.email}}</strong>.</p>
+<img src="{{asset('assets/gif/catCake.gif')}}" alt="catCake">
+
+{% endblock %}
