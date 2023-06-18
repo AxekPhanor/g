@@ -1,0 +1,21 @@
+.cartPreview{
+    width: 200px;
+    border: 1px solid;
+    right: 0;
+    top:58px;
+    position:absolute;
+}
+
+.dropdown-content {
+    position: fixed;
+    right: 0;
+    background-color: white;
+}
+
+.dropdown-menu {
+    --bs-dropdown-padding-x: none;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    background-color: white;
+}

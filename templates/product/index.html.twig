@@ -4,12 +4,12 @@
 
 {% block content %}
 <link href="{{ asset('assets/css/product.css') }}"  rel="stylesheet">
+
+<div id="alert"></div>
+
 <h1 class="h1 mb-3 font-weight-normal">Produits</h1>
-
 <div class="row">
-
 {% for product in products %}
-
 <div class="card" style="width: 17rem; margin: 2px;">
   <img src="uploads/images/{{product.illustration}}" alt="{{product.name}}" class="card-img-top">
   <div class="card-body">
@@ -17,7 +17,7 @@
     <span class="card-price">{{(product.price / 100 ) | number_format(2)}} € </span>
     <p class="card-text">-</p>
     {% if app.user %}
-    <a class="btn btn-secondary" href="{{ path('add_to_cartP', {'id': product.id}) }}">Ajouter au panier</a>
+    <a class="btn btn-secondary" href="{{ path('add_to_cartP', {'id': product.id}) }}" onClick="newAlert()">Ajouter au panier</a>
     {% else %}
     <button class="btn btn-secondary" disabled href="">Ajouter au panier</button>
     {% endif %}
@@ -27,5 +27,28 @@
 {% endfor %}
 </div>
 
+<script type="text/javascript">
+function newAlert(){
+  document.getElementById('alert').innerHTML = "<div style=\"text-align: center\"class=\"alert alert-success\" role=\"alert\"><strong>Produit ajouté au panier</strong></div>";
+}
+</script>
+
 {% endblock %}
+
+{% block cartSummary %}
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+  </a>
+  <ul class="dropdown-menu">
+    <div class="dropdown-content">
+      <li class="dropdown-item">Contenu de mon panier</li>
+      <li><hr class="dropdown-divider"></li>
+      {% for product in cart %}
+        <li class="dropdown-item">{{product.product.name}} <strong> x {{product.quantity}}</strong></li>
+      {% endfor %}
+    </div>
+  </ul>
+</li>
+{% endblock %}
+
 
