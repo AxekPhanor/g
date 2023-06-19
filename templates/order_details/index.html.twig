@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail de la commande - Les gâteaux de la madre{% endblock %}
+
+{% block content %}
+{% set total = 0 %}
+<h1 class="h1 mb-3 font-weight-normal">Détail de la commande n° {{reference}}</h1>
+<a href="{{path('app_account')}}">Retour</a>
+<hr>
+<strong>Commande passé le :</strong> {{order.createdAt|date('d-m-Y')}}<br/>
+<strong>Référence de ma commande :</strong> {{order.reference}}<br/>
+<strong>Transporteur :</strong> {{order.carrierName}}<br/>
+<strong>Payé :</strong> 
+{% if order.isPaid %}
+Oui
+{% else %}
+Non, <a href="{{ path('app_stripe',{'reference': reference}) }}">cliquer ici</a> pour procéder au paiment
+{% endif %}<br/>
+<hr>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Produits</th>
+      <th scope="col">Quantité</th>
+      <th scope="col">Prix</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for product in orderDetails %}
+    <tr>
+        <td>{{product.product}}</td>
+        <td>{{product.quantity}}</td>
+        <td>{{(product.total / 100)|number_format(2)}} €</td>
+    </tr>
+    {% set total = total + product.total %}
+{% endfor %}
+</tbody>
+</table>
+<strong>Total (frais de port inclu) :</strong> {{((total / 100) + order.carrierPrice)|number_format(2)}} €<br/>
+{% endblock %}

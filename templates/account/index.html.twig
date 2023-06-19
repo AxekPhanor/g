@@ -27,11 +27,41 @@
 <strong>Dernière adresse utilisé</strong><br>
 </div>
 <div class="divTableCell ">
-    <input type="text" class="inputBox" value="Bayonne" disabled><br>
+    <input type="text" class="inputBox" value="{{orders[0].delivery|split('<br/>')[2]}}, {{orders[0].delivery|split('<br/>')[3]}}" disabled><br>
     <a class="btn btn-dark mt-3" href="{{path('app_account_address')}}">Gérer mes adresses</a>
 </div>
 </div>
 </div>
 </div>
-
+<br/><br/>
+<hr>
+<br/>
+<h1 class="h1 mb-3 font-weight-normal">Mes commandes</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">n° de commande</th>
+      <th scope="col">commande effectué le</th>
+      <th scope="col">Adresse de livraison</th>
+      <th scope="col">Payé</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for order in orders|reverse %}
+    <tr>
+      <td><a href="{{ path('app_order_details', { 'reference': order.reference}) }}">{{order.reference}}</a></td> <!--- Amélioration possible : créer une vue pour chaque référence où l'on peut reprendre une commande impayé -->
+      <td>{{order.createdAt|date('d-m-Y')}}</td>
+      <td>
+        {{order.delivery|split('<br/>')[2]}}<br/>
+        {{order.delivery|split('<br/>')[3]}}<br/>
+      </td>
+      {% if order.isPaid %}
+      <td>Oui</td>
+      {% else %}
+      <td>Non</td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}

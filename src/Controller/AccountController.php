@@ -9,9 +9,17 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use App\Entity\Order;
 
 class AccountController extends AbstractController
 {
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     #[Route('/compte', name: 'app_account')]
     public function index(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {
@@ -30,17 +38,15 @@ class AccountController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             $passwordIsChange = true;
-
-            //return $this->redirectToRoute('app_account');
         }
-
-
-
+        $orders = $this->entityManager->getRepository(Order::class)->findBy(array('user' => $user->getId()));
+        //TODO: Afficher du dernier au premier élément (il faudra probablement créer des fonctions de sorting)
         return $this->render('account/index.html.twig', [
             'controller_name' => 'AccountController',
             'email' => $user->getEmail(), 
             'form' => $form->createView(),
             'passwordIsChange' => $passwordIsChange,
+            'orders' => $orders,
         ]);
     }
 }
