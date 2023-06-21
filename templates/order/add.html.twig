@@ -39,7 +39,7 @@
         {% endfor %}
         <hr>
         <b>Sous-Total : </b> {{total|number_format(2, ',')}} € <br/>
-        <b>livraison : </b> {{carrier.price|number_format(2, ',')}} €
+        <b>livraison : </b> {{(carrier.price)|number_format(2, ',')}} €
         <hr>
         <b>Total : </b> {{(total + carrier.price)|number_format(2, ',')}} €
         
