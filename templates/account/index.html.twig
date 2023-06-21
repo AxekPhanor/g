@@ -27,8 +27,13 @@
 <strong>Dernière adresse utilisé</strong><br>
 </div>
 <div class="divTableCell ">
-    <input type="text" class="inputBox" value="{{orders[orders|length - 1].delivery|split('<br/>')[2]}}, {{orders[orders|length - 1].delivery|split('<br/>')[3]}}" disabled><br>
+    {% if orders %}
+      <input type="text" class="inputBox" value="{{orders[orders|length - 1].delivery|split('<br/>')[2]}}, {{orders[orders|length - 1].delivery|split('<br/>')[3]}}" disabled><br>
+    {% else %}
+      <input type="text" class="inputBox" value="" disabled><br>
+    {% endif %}
     <a class="btn btn-dark mt-3" href="{{path('app_account_address')}}">Gérer mes adresses</a>
+
 </div>
 </div>
 </div>
@@ -47,6 +52,7 @@
     </tr>
   </thead>
   <tbody>
+  {% if orders %}
   {% for order in orders|reverse %}
     <tr>
       <td><a href="{{ path('app_order_details', { 'reference': order.reference}) }}">{{order.reference}}</a></td> <!--- Amélioration possible : créer une vue pour chaque référence où l'on peut reprendre une commande impayé -->
@@ -61,7 +67,8 @@
       <td>Non</td>
       {% endif %}
     </tr>
-    {% endfor %}
+  {% endfor %}
+  {% endif %}
   </tbody>
 </table>
 {% endblock %}

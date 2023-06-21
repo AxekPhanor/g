@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Product;
 use App\Entity\User;
 use App\ClassPhp\Cart;
+use App\ClassPhp\Mail;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ProductController extends AbstractController

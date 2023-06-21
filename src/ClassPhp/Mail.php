@@ -17,7 +17,7 @@ class Mail
             'Messages' => [
             [
                 'From' => [
-                'Email' => "axel.phanor64@gmail.com", // TODO: A MODIFIER PAR UN NOM DE DOMAINE
+                'Email' => "", // TODO: A MODIFIER PAR UN NOM DE DOMAINE
                 'Name' => "Les gateaux de la madre"
                 ],
                 'To' => [

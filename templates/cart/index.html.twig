@@ -9,6 +9,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th scope="col"></th>
       <th scope="col">Produit</th>
       <th scope="col">Quantité</th>
       <th scope="col">Prix</th>
@@ -39,8 +40,8 @@
                 </a>
             {% endif %}
         </td>
-        <td>{{(products.product.price / 100 ) | number_format(2)}} € </td>
-        <td>{{(products.product.price / 100 ) * products.quantity | number_format(2)}} €</td>
+        <td>{{(products.product.price / 100 )|number_format(2)}} € </td>
+        <td>{{((products.product.price / 100 ) * products.quantity)|number_format(2)}} €</td>
         <td>
         <a href="{{ path('remove_cart', {'id': products.product.id}) }}">
         <img src="{{ asset('assets/icones/delete.png') }}" height="18px" alt="Supprimer mon produit"></td>

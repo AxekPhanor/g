@@ -6,3 +6,13 @@ body{
     background-image: url("../../uploads/background/muffins-bougies-aalaw-pepite-fond-rose.jpg");
     background-size:cover;
 }
+
+p{
+    margin-bottom: 40px;
+}
+
+.btn {
+    bottom: 0;
+    position: absolute;
+    margin-bottom: 10px;
+}
